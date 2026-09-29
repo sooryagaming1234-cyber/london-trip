@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="London Trip">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<title>London • 30 Day Trip</title>
+<style>
+:root{
+  --bg:#090909; --card:#151515; --card2:#1c1c1c; --gold:#d6ad55;
+  --text:#f5f2ea; --muted:#a9a59c; --line:#2b2b2b; --green:#7fc78c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea{font:inherit}
+header{padding:28px 18px 18px;position:sticky;top:0;background:rgba(9,9,9,.94);backdrop-filter:blur(14px);z-index:10;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--gold);font-size:12px;letter-spacing:2px;text-transform:uppercase}
+h1{font-size:32px;margin:6px 0 3px}.sub{color:var(--muted);font-size:14px}
+nav{display:flex;gap:8px;overflow-x:auto;padding:14px 0 2px;scrollbar-width:none}
+nav button{white-space:nowrap;background:var(--card);border:1px solid var(--line);color:var(--muted);padding:9px 14px;border-radius:999px}
+nav button.active{background:var(--gold);color:#111;border-color:var(--gold);font-weight:700}
+main{padding:18px;max-width:900px;margin:auto}
+.tab{display:none}.tab.active{display:block}
+.hero{background:linear-gradient(145deg,#1b1812,#111);border:1px solid #3a3020;border-radius:24px;padding:22px;margin-bottom:16px}
+.hero h2{margin:0 0 8px;font-size:25px}.hero p{color:var(--muted);line-height:1.6;margin:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.stat strong{display:block;font-size:21px;color:var(--gold);margin-top:4px}
+.label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+.section-title{margin:24px 0 10px;font-size:18px}
+.day{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:17px;margin-bottom:12px}
+.day-head{display:flex;justify-content:space-between;gap:12px}.day h3{margin:0;font-size:18px}.day small{color:var(--gold)}
+.day ul{padding-left:20px;color:#d8d5ce;line-height:1.65}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+a,.action{display:inline-block;background:#242424;border:1px solid var(--line);color:var(--text);text-decoration:none;padding:8px 11px;border-radius:10px;font-size:13px}
+a:hover,.action:hover{border-color:var(--gold)}
+.check{display:flex;align-items:flex-start;gap:11px;padding:12px 0;border-bottom:1px solid var(--line)}
+.check input{accent-color:var(--gold);width:19px;height:19px;margin-top:2px}.done{text-decoration:line-through;color:#777}
+input[type=text],input[type=number],textarea{width:100%;background:#101010;border:1px solid var(--line);color:var(--text);border-radius:12px;padding:11px;margin:6px 0 10px}
+textarea{min-height:130px;resize:vertical}
+.btn{background:var(--gold);color:#111;border:0;border-radius:12px;padding:11px 15px;font-weight:700}
+.expense{display:grid;grid-template-columns:1fr 100px auto;gap:8px;margin-bottom:8px}
+.total{font-size:22px;color:var(--gold);font-weight:700;margin:15px 0}
+.muted{color:var(--muted)}.pill{display:inline-block;color:var(--gold);background:#282115;padding:5px 9px;border-radius:999px;font-size:12px;margin:3px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Personal Trip Planner</div>
+  <h1>London · 30 Days</h1>
+  <div class="sub">Tourist → local • budget-focused</div>
+  <nav id="nav"></nav>
+</header>
+
+<main>
+<section id="home" class="tab active">
+  <div class="hero">
+    <h2>Your London Month</h2>
+    <p>A slower-paced month combining iconic landmarks, technology and history, local neighborhoods, markets, parks and day trips.</p>
+  </div>
+  <div class="grid">
+    <div class="stat"><span class="label">Duration</span><strong>30 days</strong></div>
+    <div class="stat"><span class="label">Base budget</span><strong>£1,930–£2,730</strong></div>
+    <div class="stat"><span class="label">Weeks</span><strong>4</strong></div>
+    <div class="stat"><span class="label">Style</span><strong>Budget</strong></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="label">Today</div>
+    <h2 style="margin:6px 0">Your London day</h2>
+    <p class="muted">Open <b>30 Days</b> to mark today's plan complete, or use the day cards to open Maps and Photos.</p>
+    <div class="pill">Daily target £25 ≈ ₹3,180</div>
+  </div>
+  <h2 class="section-title">Quick links</h2>
+  <div id="quick"></div>
+</section>
+
+<section id="plan" class="tab">
+  <div class="hero">
+    <h2>30-Day Plan</h2>
+    <p>Your London month, split into individual days. Mark each day complete as you travel.</p>
+    <div id="progressText" style="margin-top:12px;color:var(--gold);font-weight:700"></div>
+    <div style="height:8px;background:#282828;border-radius:99px;margin-top:10px;overflow:hidden">
+      <div id="progressBar" style="height:100%;width:0;background:var(--gold);transition:.25s"></div>
+    </div>
+  </div>
+  <div id="dayPlanner"></div>
+  <h2 class="section-title">Weekly overview</h2>
+  <div id="days"></div>
+</section>
+
+<section id="places" class="tab">
+  <div class="hero"><h2>Places</h2><p>Open a location directly in Google Maps or search Google Images.</p></div>
+  <div id="placesList"></div>
+</section>
+
+<section id="budget" class="tab">
+  <div class="hero"><h2>Budget</h2><p>Planning estimates from your trip plan. Actual prices can change.</p>
+<label class="label">GBP → INR planning rate</label>
+<input id="fxRate" type="number" step="0.1" value="127.2" onchange="updateFX(this.value)">
+<div class="muted">Editable estimate. Example: £100 = ₹12,720 at this rate.</div></div>
+  <div class="grid" id="budgetGrid"></div>
+  <div class="total" id="expenseTotal">Actual spending: £0</div>
+  <h2 class="section-title">Add expense</h2>
+  <div class="expense">
+    <input id="expenseName" type="text" placeholder="e.g. Hostel">
+    <input id="expenseAmount" type="number" step="0.01" placeholder="£">
+    <button class="btn" onclick="addExpense()">Add</button>
+  </div>
+  <div id="expenses"></div>
+</section>
+
+<section id="checklist" class="tab">
+  <div class="hero"><h2>Checklist</h2><p>Saved automatically on this device.</p></div>
+  <div id="checks"></div>
+</section>
+
+<section id="food" class="tab">
+  <div class="hero"><h2>Food Explorer</h2><p>Budget-friendly places and food ideas from your plan.</p></div>
+  <div class="grid">
+    <div class="card"><strong>Supermarket meals</strong><p class="muted">Tesco, Sainsbury's, Co-op</p><span class="pill">£4 ≈ ₹509</span></div>
+    <div class="card"><strong>Street food</strong><p class="muted">Borough, Camden, Spitalfields, Brick Lane</p><span class="pill">£7–£12</span></div>
+    <div class="card"><strong>Cheap pub meals</strong><p class="muted">Wetherspoons-style budget dining</p><span class="pill">£10 ≈ ₹1,272</span></div>
+    <div class="card"><strong>Food rescue</strong><p class="muted">Too Good To Go</p><span class="pill">Variable</span></div>
+  </div>
+</section>
+
+<section id="pack" class="tab">
+  <div class="hero"><h2>Packing List</h2><p>Tap items as you pack. Saved automatically.</p></div>
+  <div id="packList"></div>
+</section>
+
+<section id="journal" class="tab">
+  <div class="hero"><h2>Trip Journal</h2><p>Write a short memory for each day. Saved on this device.</p></div>
+  <select id="journalDay" onchange="loadJournal()" style="width:100%;background:#101010;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px"></select>
+  <textarea id="journalText" placeholder="What happened today? Favorite moment? Best food?"></textarea>
+  <button class="btn" onclick="saveJournal()">Save Day</button>
+  <span id="journalSaved" class="muted"></span>
+</section>
+
+<section id="notes" class="tab">
+  <div class="hero"><h2>My Notes</h2><p>Your private trip notes stay in this browser.</p></div>
+  <textarea id="notesBox" placeholder="Plans, places to revisit, things to remember..."></textarea>
+  <button class="btn" onclick="saveNotes()">Save Notes</button>
+  <span id="saved" class="muted"></span>
+</section>
+</main>
+
+<script>
+/* =========================
+   EDIT THIS DATA BLOCK ONLY
+   ========================= */
+const TRIP = {
+  fxGBP_INR: 127.2, // editable planning estimate: ₹ per £1
+
+  stay: [
+    ["Stratford & Leyton","East London","Central, Jubilee & Elizabeth lines"],
+    ["Camden & Kentish Town","North London","Markets, music and transport links"],
+    ["Greenwich & New Cross","South East London","Parks, maritime history and student area"],
+    ["Shepherd’s Bush","West London","Transport links and diverse food"]
+  ],
+  budget: [
+    ["Accommodation","£900–£1,400"],
+    ["Food & Drink","£600–£800"],
+    ["Transport","~£180"],
+    ["Attractions","£150–£250"],
+    ["Miscellaneous","~£100"]
+  ],
+  weeks: [
+    {week:"Week 1",title:"Iconic Landmarks",items:["South Bank: Westminster Bridge → London Eye → Tate Modern → Shakespeare’s Globe → Tower Bridge","Buckingham Palace, Changing of the Guard, St James’s Park and Trafalgar Square","Piccadilly Circus, Covent Garden and Soho","British Museum and National Gallery"]},
+    {week:"Week 2",title:"Science, Tech & History",items:["Science Museum and Natural History Museum","Bletchley Park day trip","Greenwich, Thames Clipper, Royal Observatory and Cutty Sark"]},
+    {week:"Week 3",title:"Markets, Culture & Vintage London",items:["Shoreditch and Brick Lane street art","Columbia Road Flower Market on Sunday","Camden Market and Regent’s Canal to Little Venice","Portobello Road Market on Saturday","Hyde Park, Regent’s Park and Primrose Hill"]},
+    {week:"Week 4",title:"Local Life & Day Trips",items:["Oxford or Cambridge day trip","Richmond Park and deer","Hampstead Heath and Parliament Hill","Final souvenir shopping: Oxford Street, Carnaby Street or favorite markets"]}
+  ],
+  places: [
+    "Big Ben","Westminster Bridge","London Eye","Tate Modern","Shakespeare's Globe","Tower Bridge",
+    "Buckingham Palace","St James's Park","Trafalgar Square","Piccadilly Circus","Covent Garden","Soho",
+    "British Museum","National Gallery","Science Museum London","Natural History Museum London","Bletchley Park",
+    "Greenwich","Royal Observatory Greenwich","Cutty Sark","Shoreditch","Brick Lane London","Columbia Road Flower Market",
+    "Camden Market","Little Venice London","Portobello Road Market","Hyde Park London","Regent's Park","Primrose Hill",
+    "Oxford","Cambridge","Richmond Park","Hampstead Heath","Parliament Hill London","Oxford Street London","Carnaby Street"
+  ],
+  checklist: [
+    "Passport","UK Standard Visitor Visa","Travel insurance","Flight booking","Accommodation booking",
+    "Student ID","Contactless payment card / phone wallet","SIM / eSIM","Comfortable walking shoes",
+    "Waterproof jacket","Power adapter","Basic medicines","Emergency contacts","Travel documents backup"
+  ],
+  days: [
+    ["Day 1","Arrival & local setup","Check in, buy essentials, explore your local neighborhood"],
+    ["Day 2","Westminster","Big Ben, Parliament, Westminster Bridge and South Bank"],
+    ["Day 3","South Bank","London Eye area, Tate Modern and Shakespeare's Globe"],
+    ["Day 4","Tower London","Walk the Thames east and finish at Tower Bridge"],
+    ["Day 5","Royal London","Buckingham Palace, Changing of the Guard and St James's Park"],
+    ["Day 6","Central London","Trafalgar Square, Piccadilly Circus, Covent Garden and Soho"],
+    ["Day 7","Free museum day","British Museum + relaxed evening"],
+    ["Day 8","South Kensington","Science Museum"],
+    ["Day 9","Natural History","Natural History Museum + Kensington area"],
+    ["Day 10","Tech exploration","Return to Science Museum for deeper engineering/computing exhibits"],
+    ["Day 11","Bletchley Park","Full day trip"],
+    ["Day 12","Greenwich","Royal Observatory, Prime Meridian and Greenwich Park"],
+    ["Day 13","Maritime London","Cutty Sark and Greenwich riverside"],
+    ["Day 14","Slow Sunday","Rest, laundry, supermarket and local exploration"],
+    ["Day 15","Shoreditch","Street art and neighborhood walk"],
+    ["Day 16","Brick Lane","Markets, food and vintage shopping"],
+    ["Day 17","Columbia Road","Flower Market + East London walk"],
+    ["Day 18","Camden","Camden Market and Regent's Canal"],
+    ["Day 19","Little Venice","Walk the canal toward Little Venice"],
+    ["Day 20","Notting Hill","Portobello Road Market"],
+    ["Day 21","London parks","Hyde Park, Regent's Park or Primrose Hill"],
+    ["Day 22","Oxford","University city day trip"],
+    ["Day 23","Local London","Free day to revisit a favorite area"],
+    ["Day 24","Cambridge","Alternative university-city day trip"],
+    ["Day 25","Richmond","Richmond Park and deer"],
+    ["Day 26","Hampstead","Hampstead Heath and Parliament Hill"],
+    ["Day 27","Local day","Work from a café, explore a neighborhood and eat locally"],
+    ["Day 28","Shopping","Oxford Street and Carnaby Street"],
+    ["Day 29","Favorites","Return to your favorite places and take photos"],
+    ["Day 30","Final London day","Souvenirs, final walk, organize luggage and prepare for departure"]
+  ]
+};
+/* ========================= */
+
+const tabs=[["home","Home"],["plan","30 Days"],["places","Places"],["budget","Budget"],["food","Food"],["pack","Packing"],["journal","Journal"],["checklist","Checklist"],["notes","Notes"]];
+document.getElementById("nav").innerHTML=tabs.map(([id,n],i)=>`<button class="${i===0?'active':''}" onclick="showTab('${id}',this)">${n}</button>`).join("");
+
+function showTab(id,btn){
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));
+ btn.classList.add("active");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function googleMap(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+", London, UK")}
+function googleImage(q){return "https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q+", London")}
+function inr(gbp){ return "₹"+Math.round(gbp*TRIP.fxGBP_INR).toLocaleString("en-IN"); }
+function money(gbp){ return "£"+Number(gbp).toFixed(2)+" <span class='muted'>("+inr(gbp)+")</span>"; }
+
+
+document.getElementById("quick").innerHTML=TRIP.stay.map(s=>`
+<div class="card" style="margin-bottom:10px"><strong>${s[0]}</strong><div class="muted">${s[1]} · ${s[2]}</div>
+<div class="actions" style="margin-top:10px"><a href="${googleMap(s[0])}" target="_blank">📍 Maps</a><a href="${googleImage(s[0])}" target="_blank">🖼️ Photos</a></div></div>`).join("");
+
+document.getElementById("days").innerHTML=TRIP.weeks.map(w=>`
+<div class="day"><div class="day-head"><h3>${w.title}</h3><small>${w.week}</small></div>
+<ul>${w.items.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+
+function renderDayPlanner(){
+  const done=state.days||{};
+  document.getElementById("dayPlanner").innerHTML=TRIP.days.map((d,i)=>{
+    const checked=!!done[i];
+    return `<div class="card" style="margin-bottom:9px">
+      <div style="display:flex;align-items:flex-start;gap:12px">
+        <input type="checkbox" style="accent-color:var(--gold);width:20px;height:20px;margin-top:3px" ${checked?"checked":""} onchange="toggleDay(${i},this.checked)">
+        <div style="flex:1">
+          <div class="label">${d[0]}</div>
+          <strong style="font-size:18px">${d[1]}</strong>
+          <div class="muted" style="margin-top:5px;line-height:1.45">${d[2]}</div>
+          <div class="pill">Daily planning target: £25 ≈ ${inr(25)}</div>
+          <div class="actions" style="margin-top:10px">
+            <a href="${googleMap(d[1])}" target="_blank">📍 Maps</a>
+            <a href="${googleImage(d[1])}" target="_blank">🖼️ Photos</a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+  const count=Object.values(done).filter(Boolean).length;
+  document.getElementById("progressText").textContent=`${count}/30 days completed`;
+  document.getElementById("progressBar").style.width=(count/30*100)+"%";
+}
+function toggleDay(i,v){state.days=state.days||{};state.days[i]=v;persist();renderDayPlanner()}
+
+document.getElementById("placesList").innerHTML=TRIP.places.map(p=>`
+<div class="card" style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:10px">
+<strong>${p}</strong><div class="actions"><a href="${googleMap(p)}" target="_blank">📍</a><a href="${googleImage(p)}" target="_blank">🖼️</a></div></div>`).join("");
+
+document.getElementById("budgetGrid").innerHTML=TRIP.budget.map(x=>{
+  const nums=(x[1].match(/[0-9,]+/g)||[]).map(v=>parseFloat(v.replace(/,/g,"")));
+  const mid=nums.length===2?(nums[0]+nums[1])/2:nums[0];
+  return `<div class="stat"><span class="label">${x[0]}</span><strong>${x[1]}</strong>${mid?`<div class="muted" style="margin-top:5px">≈ ${inr(mid)}</div>`:""}</div>`;
+}).join("");
+
+const KEY="london_trip_v1";
+let state=JSON.parse(localStorage.getItem(KEY)||'{"checks":{},"days":{},"expenses":[],"notes":""}');
+function persist(){localStorage.setItem(KEY,JSON.stringify(state))}
+function updateFX(v){
+  const n=parseFloat(v); if(!n || n<=0) return;
+  TRIP.fxGBP_INR=n; localStorage.setItem("london_fx",String(n));
+  renderExpenses(); renderBudget();
+}
+function renderBudget(){
+  document.getElementById("budgetGrid").innerHTML=TRIP.budget.map(x=>{
+    const nums=(x[1].match(/[0-9,]+/g)||[]).map(v=>parseFloat(v.replace(/,/g,"")));
+    const mid=nums.length===2?(nums[0]+nums[1])/2:nums[0];
+    return `<div class="stat"><span class="label">${x[0]}</span><strong>${x[1]}</strong>${mid?`<div class="muted" style="margin-top:5px">≈ ${inr(mid)}</div>`:""}</div>`;
+  }).join("");
+}
+function renderChecks(){
+ document.getElementById("checks").innerHTML=TRIP.checklist.map((x,i)=>{
+ const checked=!!state.checks[i];
+ return `<label class="check"><input type="checkbox" ${checked?"checked":""} onchange="toggleCheck(${i},this.checked)"><span class="${checked?"done":""}">${x}</span></label>`;
+ }).join("");
+}
+function toggleCheck(i,v){state.checks[i]=v;persist();renderChecks()}
+function addExpense(){
+ const n=document.getElementById("expenseName").value.trim(), a=parseFloat(document.getElementById("expenseAmount").value);
+ if(!n||!a)return;
+ state.expenses.push({n,a});persist();
+ document.getElementById("expenseName").value="";document.getElementById("expenseAmount").value="";renderExpenses();
+}
+function deleteExpense(i){state.expenses.splice(i,1);persist();renderExpenses()}
+function renderExpenses(){
+ document.getElementById("expenses").innerHTML=state.expenses.map((e,i)=>`
+ <div class="card" style="margin-bottom:8px;display:flex;justify-content:space-between"><span>${e.n}</span><strong>£${e.a.toFixed(2)} <span class="muted">(${inr(e.a)})</span></strong><button class="action" onclick="deleteExpense(${i})">Delete</button></div>`).join("");
+ const total=state.expenses.reduce((s,e)=>s+e.a,0);
+ document.getElementById("expenseTotal").innerHTML=`Actual spending: £${total.toFixed(2)} <span class="muted">(${inr(total)})</span>`;
+}
+const PACK=["Passport","Visa documents","Travel insurance","Flight details","UK power adapter","Phone + charger","Power bank","Laptop + charger","Comfortable walking shoes","Waterproof jacket","Everyday clothes","Small backpack","Water bottle","Basic medicines","Student ID"];
+function renderPack(){
+  state.pack=state.pack||{};
+  document.getElementById("packList").innerHTML=PACK.map((x,i)=>`<label class="check"><input type="checkbox" ${state.pack[i]?"checked":""} onchange="togglePack(${i},this.checked)"><span class="${state.pack[i]?"done":""}">${x}</span></label>`).join("");
+}
+function togglePack(i,v){state.pack=state.pack||{};state.pack[i]=v;persist();renderPack()}
+function initJournal(){
+  document.getElementById("journalDay").innerHTML=TRIP.days.map((d,i)=>`<option value="${i}">${d[0]} — ${d[1]}</option>`).join("");
+  loadJournal();
+}
+function loadJournal(){
+  const i=document.getElementById("journalDay").value;
+  document.getElementById("journalText").value=(state.journal||{})[i]||"";
+}
+function saveJournal(){
+  const i=document.getElementById("journalDay").value;
+  state.journal=state.journal||{}; state.journal[i]=document.getElementById("journalText").value; persist();
+  document.getElementById("journalSaved").textContent=" Saved ✓";
+  setTimeout(()=>document.getElementById("journalSaved").textContent="",1500);
+}
+function saveNotes(){state.notes=document.getElementById("notesBox").value;persist();document.getElementById("saved").textContent=" Saved ✓";setTimeout(()=>document.getElementById("saved").textContent="",1500)}
+const savedFX=parseFloat(localStorage.getItem("london_fx"));
+if(savedFX>0){TRIP.fxGBP_INR=savedFX;document.getElementById("fxRate").value=savedFX;}
+document.getElementById("notesBox").value=state.notes;
+renderChecks();renderExpenses();renderDayPlanner();renderPack();initJournal();renderBudget();
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}
+</script>
+
+</body>
+</html>

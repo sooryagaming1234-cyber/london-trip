@@ -1,361 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b0b0b">
-<link rel="manifest" href="manifest.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="London Trip">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-
-<title>London • 30 Day Trip</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="London 2.0"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>London 2.0 • Personal Travel Companion</title>
 <style>
-:root{
-  --bg:#090909; --card:#151515; --card2:#1c1c1c; --gold:#d6ad55;
-  --text:#f5f2ea; --muted:#a9a59c; --line:#2b2b2b; --green:#7fc78c;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,textarea{font:inherit}
-header{padding:28px 18px 18px;position:sticky;top:0;background:rgba(9,9,9,.94);backdrop-filter:blur(14px);z-index:10;border-bottom:1px solid var(--line)}
-.eyebrow{color:var(--gold);font-size:12px;letter-spacing:2px;text-transform:uppercase}
-h1{font-size:32px;margin:6px 0 3px}.sub{color:var(--muted);font-size:14px}
-nav{display:flex;gap:8px;overflow-x:auto;padding:14px 0 2px;scrollbar-width:none}
-nav button{white-space:nowrap;background:var(--card);border:1px solid var(--line);color:var(--muted);padding:9px 14px;border-radius:999px}
-nav button.active{background:var(--gold);color:#111;border-color:var(--gold);font-weight:700}
-main{padding:18px;max-width:900px;margin:auto}
-.tab{display:none}.tab.active{display:block}
-.hero{background:linear-gradient(145deg,#1b1812,#111);border:1px solid #3a3020;border-radius:24px;padding:22px;margin-bottom:16px}
-.hero h2{margin:0 0 8px;font-size:25px}.hero p{color:var(--muted);line-height:1.6;margin:0}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
-.stat strong{display:block;font-size:21px;color:var(--gold);margin-top:4px}
-.label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
-.section-title{margin:24px 0 10px;font-size:18px}
-.day{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:17px;margin-bottom:12px}
-.day-head{display:flex;justify-content:space-between;gap:12px}.day h3{margin:0;font-size:18px}.day small{color:var(--gold)}
-.day ul{padding-left:20px;color:#d8d5ce;line-height:1.65}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-a,.action{display:inline-block;background:#242424;border:1px solid var(--line);color:var(--text);text-decoration:none;padding:8px 11px;border-radius:10px;font-size:13px}
-a:hover,.action:hover{border-color:var(--gold)}
-.check{display:flex;align-items:flex-start;gap:11px;padding:12px 0;border-bottom:1px solid var(--line)}
-.check input{accent-color:var(--gold);width:19px;height:19px;margin-top:2px}.done{text-decoration:line-through;color:#777}
-input[type=text],input[type=number],textarea{width:100%;background:#101010;border:1px solid var(--line);color:var(--text);border-radius:12px;padding:11px;margin:6px 0 10px}
-textarea{min-height:130px;resize:vertical}
-.btn{background:var(--gold);color:#111;border:0;border-radius:12px;padding:11px 15px;font-weight:700}
-.expense{display:grid;grid-template-columns:1fr 100px auto;gap:8px;margin-bottom:8px}
-.total{font-size:22px;color:var(--gold);font-weight:700;margin:15px 0}
-.muted{color:var(--muted)}.pill{display:inline-block;color:var(--gold);background:#282115;padding:5px 9px;border-radius:999px;font-size:12px;margin:3px}
-@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
-</style>
-</head>
+:root{--bg:#080808;--card:#151515;--card2:#1d1d1d;--gold:#d8b15c;--text:#f7f4ed;--muted:#aaa59b;--line:#2c2c2c;--green:#7fcb91;--blue:#7eb5ff;--red:#ef8585}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}header{position:sticky;top:0;z-index:20;padding:22px 16px 10px;background:rgba(8,8,8,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:2px;text-transform:uppercase}h1{margin:5px 0 2px;font-size:30px}.sub{color:var(--muted);font-size:13px}nav{display:flex;gap:7px;overflow:auto;padding:13px 0 3px;scrollbar-width:none}nav button{white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:8px 12px}nav button.active{background:var(--gold);color:#111;border-color:var(--gold);font-weight:700}main{max-width:980px;margin:auto;padding:16px}.tab{display:none}.tab.active{display:block}.hero{border:1px solid #403523;background:linear-gradient(145deg,#1c1810,#111);border-radius:24px;padding:21px;margin-bottom:15px}.hero h2{margin:0 0 7px;font-size:24px}.hero p{margin:0;color:var(--muted);line-height:1.6}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.card,.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px}.stat strong{display:block;color:var(--gold);font-size:20px;margin-top:5px}.label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}.section-title{margin:23px 0 10px;font-size:18px}.actions{display:flex;gap:7px;flex-wrap:wrap}a,.action{display:inline-block;background:#242424;border:1px solid var(--line);color:var(--text);text-decoration:none;padding:8px 10px;border-radius:10px;font-size:12px}a:hover,.action:hover{border-color:var(--gold)}.btn{background:var(--gold);color:#111;border:0;border-radius:11px;padding:10px 14px;font-weight:700}.pill{display:inline-block;color:var(--gold);background:#292216;padding:5px 8px;border-radius:999px;font-size:11px;margin:3px 3px 0 0}.muted{color:var(--muted)}input[type=text],input[type=number],textarea,select{width:100%;background:#101010;border:1px solid var(--line);color:var(--text);border-radius:11px;padding:10px;margin:6px 0 10px}textarea{min-height:130px;resize:vertical}.search{position:relative;margin:10px 0}.search input{margin:0;padding:12px 14px}.photo{width:100%;height:180px;object-fit:cover;border-radius:14px;background:#222;display:block;margin-bottom:12px}.place-card{overflow:hidden}.place-card .photo{margin:-15px -15px 12px;width:calc(100% + 30px);height:190px;border-radius:18px 18px 0 0}.meta{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.info-row{display:grid;grid-template-columns:90px 1fr;gap:8px;padding:7px 0;border-bottom:1px solid #262626;font-size:13px}.info-row:last-child{border:0}.tag{font-size:11px;border:1px solid var(--line);padding:4px 7px;border-radius:999px;color:var(--muted)}.day{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:15px;margin-bottom:10px}.day-head{display:flex;justify-content:space-between;gap:10px}.day h3{margin:0;font-size:17px}.day small{color:var(--gold)}.day ul{color:#d8d5ce;line-height:1.6;padding-left:20px}.expense{display:grid;grid-template-columns:1fr 100px auto;gap:7px}.check{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.check input{width:19px;height:19px;accent-color:var(--gold)}.done{text-decoration:line-through;color:#777}.total{font-size:21px;font-weight:700;color:var(--gold);margin:14px 0}.notice{padding:11px 13px;border-radius:12px;background:#111d28;border:1px solid #263a50;color:#cfe2ff;font-size:12px;line-height:1.5}.source{font-size:11px;color:var(--muted)}.route{border-left:2px solid var(--gold);padding-left:13px;margin:10px 0}.route strong{color:var(--gold)}@media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}.place-grid{grid-template-columns:repeat(2,1fr)!important}.photo{height:210px}.hero{padding:25px}}
+</style></head>
 <body>
-<header>
-  <div class="eyebrow">Personal Trip Planner</div>
-  <h1>London · 30 Days</h1>
-  <div class="sub">Tourist → local • budget-focused</div>
-  <nav id="nav"></nav>
-</header>
-
+<header><div class="eyebrow">Personal Travel Companion</div><h1>London · 2.0</h1><div class="sub">30 days • places • food • hotels • transport • budget</div><nav id="nav"></nav></header>
 <main>
-<section id="home" class="tab active">
-  <div class="hero">
-    <h2>Your London Month</h2>
-    <p>A slower-paced month combining iconic landmarks, technology and history, local neighborhoods, markets, parks and day trips.</p>
-  </div>
-  <div class="grid">
-    <div class="stat"><span class="label">Duration</span><strong>30 days</strong></div>
-    <div class="stat"><span class="label">Base budget</span><strong>£1,930–£2,730</strong></div>
-    <div class="stat"><span class="label">Weeks</span><strong>4</strong></div>
-    <div class="stat"><span class="label">Style</span><strong>Budget</strong></div>
-  </div>
-  <div class="card" style="margin-top:16px">
-    <div class="label">Today</div>
-    <h2 style="margin:6px 0">Your London day</h2>
-    <p class="muted">Open <b>30 Days</b> to mark today's plan complete, or use the day cards to open Maps and Photos.</p>
-    <div class="pill">Daily target £25 ≈ ₹3,180</div>
-  </div>
-  <h2 class="section-title">Quick links</h2>
-  <div id="quick"></div>
-</section>
-
-<section id="plan" class="tab">
-  <div class="hero">
-    <h2>30-Day Plan</h2>
-    <p>Your London month, split into individual days. Mark each day complete as you travel.</p>
-    <div id="progressText" style="margin-top:12px;color:var(--gold);font-weight:700"></div>
-    <div style="height:8px;background:#282828;border-radius:99px;margin-top:10px;overflow:hidden">
-      <div id="progressBar" style="height:100%;width:0;background:var(--gold);transition:.25s"></div>
-    </div>
-  </div>
-  <div id="dayPlanner"></div>
-  <h2 class="section-title">Weekly overview</h2>
-  <div id="days"></div>
-</section>
-
-<section id="places" class="tab">
-  <div class="hero"><h2>Places</h2><p>Open a location directly in Google Maps or search Google Images.</p></div>
-  <div id="placesList"></div>
-</section>
-
-<section id="budget" class="tab">
-  <div class="hero"><h2>Budget</h2><p>Planning estimates from your trip plan. Actual prices can change.</p>
-<label class="label">GBP → INR planning rate</label>
-<input id="fxRate" type="number" step="0.1" value="127.2" onchange="updateFX(this.value)">
-<div class="muted">Editable estimate. Example: £100 = ₹12,720 at this rate.</div></div>
-  <div class="grid" id="budgetGrid"></div>
-  <div class="total" id="expenseTotal">Actual spending: £0</div>
-  <h2 class="section-title">Add expense</h2>
-  <div class="expense">
-    <input id="expenseName" type="text" placeholder="e.g. Hostel">
-    <input id="expenseAmount" type="number" step="0.01" placeholder="£">
-    <button class="btn" onclick="addExpense()">Add</button>
-  </div>
-  <div id="expenses"></div>
-</section>
-
-<section id="checklist" class="tab">
-  <div class="hero"><h2>Checklist</h2><p>Saved automatically on this device.</p></div>
-  <div id="checks"></div>
-</section>
-
-<section id="food" class="tab">
-  <div class="hero"><h2>Food Explorer</h2><p>Budget-friendly places and food ideas from your plan.</p></div>
-  <div class="grid">
-    <div class="card"><strong>Supermarket meals</strong><p class="muted">Tesco, Sainsbury's, Co-op</p><span class="pill">£4 ≈ ₹509</span></div>
-    <div class="card"><strong>Street food</strong><p class="muted">Borough, Camden, Spitalfields, Brick Lane</p><span class="pill">£7–£12</span></div>
-    <div class="card"><strong>Cheap pub meals</strong><p class="muted">Wetherspoons-style budget dining</p><span class="pill">£10 ≈ ₹1,272</span></div>
-    <div class="card"><strong>Food rescue</strong><p class="muted">Too Good To Go</p><span class="pill">Variable</span></div>
-  </div>
-</section>
-
-<section id="pack" class="tab">
-  <div class="hero"><h2>Packing List</h2><p>Tap items as you pack. Saved automatically.</p></div>
-  <div id="packList"></div>
-</section>
-
-<section id="journal" class="tab">
-  <div class="hero"><h2>Trip Journal</h2><p>Write a short memory for each day. Saved on this device.</p></div>
-  <select id="journalDay" onchange="loadJournal()" style="width:100%;background:#101010;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px"></select>
-  <textarea id="journalText" placeholder="What happened today? Favorite moment? Best food?"></textarea>
-  <button class="btn" onclick="saveJournal()">Save Day</button>
-  <span id="journalSaved" class="muted"></span>
-</section>
-
-<section id="notes" class="tab">
-  <div class="hero"><h2>My Notes</h2><p>Your private trip notes stay in this browser.</p></div>
-  <textarea id="notesBox" placeholder="Plans, places to revisit, things to remember..."></textarea>
-  <button class="btn" onclick="saveNotes()">Save Notes</button>
-  <span id="saved" class="muted"></span>
-</section>
+<section id="home" class="tab active"><div class="hero"><h2>Your London Month, upgraded.</h2><p>Every important place now has history, why it is famous, photo, cost, transport and planning notes. Food, hotels and transport have their own searchable sections.</p></div><div class="grid"><div class="stat"><span class="label">Trip</span><strong>30 days</strong></div><div class="stat"><span class="label">Style</span><strong>Budget + slow</strong></div><div class="stat"><span class="label">Planning FX</span><strong id="homeFx">£1 → ₹127.2</strong></div><div class="stat"><span class="label">Progress</span><strong id="homeProgress">0 / 30</strong></div><div class="stat"><span class="label">Places</span><strong>12 detailed</strong></div><div class="stat"><span class="label">Food</span><strong>8 guides</strong></div></div><h2 class="section-title">2.0 modules</h2><div class="grid"><div class="card">🏛️ <strong>Place Guide</strong><p class="muted">History, fame, photos, price, time and transport.</p></div><div class="card">🍜 <strong>Food Explorer</strong><p class="muted">What to eat, where, and budget planning ranges.</p></div><div class="card">🛏️ <strong>Stay Guide</strong><p class="muted">Budget hotel/hostel areas and planning ranges.</p></div><div class="card">🚇 <strong>Transport</strong><p class="muted">How to travel, fares, caps and practical rules.</p></div><div class="card">💷 <strong>Cost Planner</strong><p class="muted">Day estimates plus your actual expenses.</p></div><div class="card">📸 <strong>Trip Journal</strong><p class="muted">Save memories locally on your phone/laptop.</p></div></div><div class="notice" style="margin-top:15px">Prices marked “planning” are estimates. Live attraction, hotel and restaurant prices can change; use the official link before booking.</div></section>
+<section id="plan" class="tab"><div class="hero"><h2>30-Day Plan</h2><p>Mark days complete. Open the detailed place/food guides from each day.</p><div class="muted" id="progressText" style="margin-top:10px">0/30 days completed</div><div style="height:7px;background:#282828;border-radius:99px;overflow:hidden;margin-top:7px"><div id="progressBar" style="height:100%;width:0;background:var(--gold)"></div></div></div><div id="dayPlanner"></div></section>
+<section id="places" class="tab"><div class="hero"><h2>🏛️ Place Guide</h2><p>Search a landmark and see what it is, why it matters, history, cost, photos and how to reach it.</p></div><div class="search"><input id="placeSearch" placeholder="Search Tower Bridge, museum, Greenwich…" oninput="renderPlaces()"></div><div id="placesList" class="grid place-grid"></div></section>
+<section id="food" class="tab"><div class="hero"><h2>🍜 Food Explorer</h2><p>Famous London food areas plus budget planning ranges. Restaurant prices are planning estimates, not live quotes.</p></div><div class="search"><input id="foodSearch" placeholder="Search Camden, curry, market…" oninput="renderFood()"></div><div id="foodList" class="grid place-grid"></div></section>
+<section id="stay" class="tab"><div class="hero"><h2>🛏️ Stay Guide</h2><p>Budget-focused areas and example accommodation types. Check live rates before booking.</p></div><div id="stayList" class="grid place-grid"></div></section>
+<section id="transport" class="tab"><div class="hero"><h2>🚇 Transport Guide</h2><p>For 2026 planning: TfL says the adult bus/tram pay-as-you-go fare is £1.75, with a £5.25 daily bus/tram cap; Zone 1–2 Tube/DLR/Overground/Elizabeth line PAYG daily cap is £8.90. Fares and offers can change, so check TfL before travel.</p><div class="actions" style="margin-top:12px"><a href="https://tfl.gov.uk/" target="_blank">TfL official</a><a href="https://tfl.gov.uk/fares/" target="_blank">Fare finder</a></div></div><div class="grid" id="transportList"></div><h2 class="section-title">How to travel</h2><div class="card"><div class="route"><strong>Short central trip</strong><br><span class="muted">Walk first. London is often easier to understand on foot.</span></div><div class="route"><strong>Normal city trip</strong><br><span class="muted">Use Tube/Elizabeth line/DLR depending on destination. Pay contactless or Oyster.</span></div><div class="route"><strong>Scenic trip</strong><br><span class="muted">Consider a bus or Thames river service when the route itself is part of the experience.</span></div><div class="route"><strong>Airport / outer London</strong><br><span class="muted">Check the exact fare and route in TfL's journey planner before leaving.</span></div></div></section>
+<section id="budget" class="tab"><div class="hero"><h2>💷 Budget & Expenses</h2><p>Keep the original 30-day budget, but now see day estimates and actual spending.</p><label class="label">GBP → INR planning rate</label><input id="fxRate" type="number" step="0.1" value="127.2" onchange="updateFX(this.value)"><div class="muted">Editable planning estimate only.</div></div><div class="grid" id="budgetGrid"></div><div class="total" id="expenseTotal">Actual spending: £0</div><div class="expense"><input id="expenseName" placeholder="e.g. Tube / lunch / hotel"><input id="expenseAmount" type="number" step="0.01" placeholder="£"><button class="btn" onclick="addExpense()">Add</button></div><div id="expenses" style="margin-top:10px"></div></section>
+<section id="checklist" class="tab"><div class="hero"><h2>Checklist</h2><p>Saved automatically on this device.</p></div><div id="checks"></div></section>
+<section id="pack" class="tab"><div class="hero"><h2>Packing</h2><p>Tap items as you pack.</p></div><div id="packList"></div></section>
+<section id="journal" class="tab"><div class="hero"><h2>Trip Journal</h2><p>Saved locally in this browser.</p></div><select id="journalDay" onchange="loadJournal()"></select><textarea id="journalText" placeholder="What happened today? Best place? Best food?"></textarea><button class="btn" onclick="saveJournal()">Save Day</button> <span id="journalSaved" class="muted"></span></section>
+<section id="notes" class="tab"><div class="hero"><h2>My Notes</h2><p>Private notes stored locally on this device.</p></div><textarea id="notesBox" placeholder="Plans, ideas, things to remember…"></textarea><button class="btn" onclick="saveNotes()">Save Notes</button> <span id="saved" class="muted"></span></section>
 </main>
-
 <script>
-/* =========================
-   EDIT THIS DATA BLOCK ONLY
-   ========================= */
-const TRIP = {
-  fxGBP_INR: 127.2, // editable planning estimate: ₹ per £1
-
-  stay: [
-    ["Stratford & Leyton","East London","Central, Jubilee & Elizabeth lines"],
-    ["Camden & Kentish Town","North London","Markets, music and transport links"],
-    ["Greenwich & New Cross","South East London","Parks, maritime history and student area"],
-    ["Shepherd’s Bush","West London","Transport links and diverse food"]
-  ],
-  budget: [
-    ["Accommodation","£900–£1,400"],
-    ["Food & Drink","£600–£800"],
-    ["Transport","~£180"],
-    ["Attractions","£150–£250"],
-    ["Miscellaneous","~£100"]
-  ],
-  weeks: [
-    {week:"Week 1",title:"Iconic Landmarks",items:["South Bank: Westminster Bridge → London Eye → Tate Modern → Shakespeare’s Globe → Tower Bridge","Buckingham Palace, Changing of the Guard, St James’s Park and Trafalgar Square","Piccadilly Circus, Covent Garden and Soho","British Museum and National Gallery"]},
-    {week:"Week 2",title:"Science, Tech & History",items:["Science Museum and Natural History Museum","Bletchley Park day trip","Greenwich, Thames Clipper, Royal Observatory and Cutty Sark"]},
-    {week:"Week 3",title:"Markets, Culture & Vintage London",items:["Shoreditch and Brick Lane street art","Columbia Road Flower Market on Sunday","Camden Market and Regent’s Canal to Little Venice","Portobello Road Market on Saturday","Hyde Park, Regent’s Park and Primrose Hill"]},
-    {week:"Week 4",title:"Local Life & Day Trips",items:["Oxford or Cambridge day trip","Richmond Park and deer","Hampstead Heath and Parliament Hill","Final souvenir shopping: Oxford Street, Carnaby Street or favorite markets"]}
-  ],
-  places: [
-    "Big Ben","Westminster Bridge","London Eye","Tate Modern","Shakespeare's Globe","Tower Bridge",
-    "Buckingham Palace","St James's Park","Trafalgar Square","Piccadilly Circus","Covent Garden","Soho",
-    "British Museum","National Gallery","Science Museum London","Natural History Museum London","Bletchley Park",
-    "Greenwich","Royal Observatory Greenwich","Cutty Sark","Shoreditch","Brick Lane London","Columbia Road Flower Market",
-    "Camden Market","Little Venice London","Portobello Road Market","Hyde Park London","Regent's Park","Primrose Hill",
-    "Oxford","Cambridge","Richmond Park","Hampstead Heath","Parliament Hill London","Oxford Street London","Carnaby Street"
-  ],
-  checklist: [
-    "Passport","UK Standard Visitor Visa","Travel insurance","Flight booking","Accommodation booking",
-    "Student ID","Contactless payment card / phone wallet","SIM / eSIM","Comfortable walking shoes",
-    "Waterproof jacket","Power adapter","Basic medicines","Emergency contacts","Travel documents backup"
-  ],
-  days: [
-    ["Day 1","Arrival & local setup","Check in, buy essentials, explore your local neighborhood"],
-    ["Day 2","Westminster","Big Ben, Parliament, Westminster Bridge and South Bank"],
-    ["Day 3","South Bank","London Eye area, Tate Modern and Shakespeare's Globe"],
-    ["Day 4","Tower London","Walk the Thames east and finish at Tower Bridge"],
-    ["Day 5","Royal London","Buckingham Palace, Changing of the Guard and St James's Park"],
-    ["Day 6","Central London","Trafalgar Square, Piccadilly Circus, Covent Garden and Soho"],
-    ["Day 7","Free museum day","British Museum + relaxed evening"],
-    ["Day 8","South Kensington","Science Museum"],
-    ["Day 9","Natural History","Natural History Museum + Kensington area"],
-    ["Day 10","Tech exploration","Return to Science Museum for deeper engineering/computing exhibits"],
-    ["Day 11","Bletchley Park","Full day trip"],
-    ["Day 12","Greenwich","Royal Observatory, Prime Meridian and Greenwich Park"],
-    ["Day 13","Maritime London","Cutty Sark and Greenwich riverside"],
-    ["Day 14","Slow Sunday","Rest, laundry, supermarket and local exploration"],
-    ["Day 15","Shoreditch","Street art and neighborhood walk"],
-    ["Day 16","Brick Lane","Markets, food and vintage shopping"],
-    ["Day 17","Columbia Road","Flower Market + East London walk"],
-    ["Day 18","Camden","Camden Market and Regent's Canal"],
-    ["Day 19","Little Venice","Walk the canal toward Little Venice"],
-    ["Day 20","Notting Hill","Portobello Road Market"],
-    ["Day 21","London parks","Hyde Park, Regent's Park or Primrose Hill"],
-    ["Day 22","Oxford","University city day trip"],
-    ["Day 23","Local London","Free day to revisit a favorite area"],
-    ["Day 24","Cambridge","Alternative university-city day trip"],
-    ["Day 25","Richmond","Richmond Park and deer"],
-    ["Day 26","Hampstead","Hampstead Heath and Parliament Hill"],
-    ["Day 27","Local day","Work from a café, explore a neighborhood and eat locally"],
-    ["Day 28","Shopping","Oxford Street and Carnaby Street"],
-    ["Day 29","Favorites","Return to your favorite places and take photos"],
-    ["Day 30","Final London day","Souvenirs, final walk, organize luggage and prepare for departure"]
-  ]
-};
-/* ========================= */
-
-const tabs=[["home","Home"],["plan","30 Days"],["places","Places"],["budget","Budget"],["food","Food"],["pack","Packing"],["journal","Journal"],["checklist","Checklist"],["notes","Notes"]];
-document.getElementById("nav").innerHTML=tabs.map(([id,n],i)=>`<button class="${i===0?'active':''}" onclick="showTab('${id}',this)">${n}</button>`).join("");
-
-function showTab(id,btn){
- document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
- document.getElementById(id).classList.add("active");
- document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));
- btn.classList.add("active");
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function googleMap(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+", London, UK")}
-function googleImage(q){return "https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q+", London")}
-function inr(gbp){ return "₹"+Math.round(gbp*TRIP.fxGBP_INR).toLocaleString("en-IN"); }
-function money(gbp){ return "£"+Number(gbp).toFixed(2)+" <span class='muted'>("+inr(gbp)+")</span>"; }
-
-
-document.getElementById("quick").innerHTML=TRIP.stay.map(s=>`
-<div class="card" style="margin-bottom:10px"><strong>${s[0]}</strong><div class="muted">${s[1]} · ${s[2]}</div>
-<div class="actions" style="margin-top:10px"><a href="${googleMap(s[0])}" target="_blank">📍 Maps</a><a href="${googleImage(s[0])}" target="_blank">🖼️ Photos</a></div></div>`).join("");
-
-document.getElementById("days").innerHTML=TRIP.weeks.map(w=>`
-<div class="day"><div class="day-head"><h3>${w.title}</h3><small>${w.week}</small></div>
-<ul>${w.items.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
-
-function renderDayPlanner(){
-  const done=state.days||{};
-  document.getElementById("dayPlanner").innerHTML=TRIP.days.map((d,i)=>{
-    const checked=!!done[i];
-    return `<div class="card" style="margin-bottom:9px">
-      <div style="display:flex;align-items:flex-start;gap:12px">
-        <input type="checkbox" style="accent-color:var(--gold);width:20px;height:20px;margin-top:3px" ${checked?"checked":""} onchange="toggleDay(${i},this.checked)">
-        <div style="flex:1">
-          <div class="label">${d[0]}</div>
-          <strong style="font-size:18px">${d[1]}</strong>
-          <div class="muted" style="margin-top:5px;line-height:1.45">${d[2]}</div>
-          <div class="pill">Daily planning target: £25 ≈ ${inr(25)}</div>
-          <div class="actions" style="margin-top:10px">
-            <a href="${googleMap(d[1])}" target="_blank">📍 Maps</a>
-            <a href="${googleImage(d[1])}" target="_blank">🖼️ Photos</a>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join("");
-  const count=Object.values(done).filter(Boolean).length;
-  document.getElementById("progressText").textContent=`${count}/30 days completed`;
-  document.getElementById("progressBar").style.width=(count/30*100)+"%";
-}
-function toggleDay(i,v){state.days=state.days||{};state.days[i]=v;persist();renderDayPlanner()}
-
-document.getElementById("placesList").innerHTML=TRIP.places.map(p=>`
-<div class="card" style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:10px">
-<strong>${p}</strong><div class="actions"><a href="${googleMap(p)}" target="_blank">📍</a><a href="${googleImage(p)}" target="_blank">🖼️</a></div></div>`).join("");
-
-document.getElementById("budgetGrid").innerHTML=TRIP.budget.map(x=>{
-  const nums=(x[1].match(/[0-9,]+/g)||[]).map(v=>parseFloat(v.replace(/,/g,"")));
-  const mid=nums.length===2?(nums[0]+nums[1])/2:nums[0];
-  return `<div class="stat"><span class="label">${x[0]}</span><strong>${x[1]}</strong>${mid?`<div class="muted" style="margin-top:5px">≈ ${inr(mid)}</div>`:""}</div>`;
-}).join("");
-
-const KEY="london_trip_v1";
-let state=JSON.parse(localStorage.getItem(KEY)||'{"checks":{},"days":{},"expenses":[],"notes":""}');
-function persist(){localStorage.setItem(KEY,JSON.stringify(state))}
-function updateFX(v){
-  const n=parseFloat(v); if(!n || n<=0) return;
-  TRIP.fxGBP_INR=n; localStorage.setItem("london_fx",String(n));
-  renderExpenses(); renderBudget();
-}
-function renderBudget(){
-  document.getElementById("budgetGrid").innerHTML=TRIP.budget.map(x=>{
-    const nums=(x[1].match(/[0-9,]+/g)||[]).map(v=>parseFloat(v.replace(/,/g,"")));
-    const mid=nums.length===2?(nums[0]+nums[1])/2:nums[0];
-    return `<div class="stat"><span class="label">${x[0]}</span><strong>${x[1]}</strong>${mid?`<div class="muted" style="margin-top:5px">≈ ${inr(mid)}</div>`:""}</div>`;
-  }).join("");
-}
-function renderChecks(){
- document.getElementById("checks").innerHTML=TRIP.checklist.map((x,i)=>{
- const checked=!!state.checks[i];
- return `<label class="check"><input type="checkbox" ${checked?"checked":""} onchange="toggleCheck(${i},this.checked)"><span class="${checked?"done":""}">${x}</span></label>`;
- }).join("");
-}
-function toggleCheck(i,v){state.checks[i]=v;persist();renderChecks()}
-function addExpense(){
- const n=document.getElementById("expenseName").value.trim(), a=parseFloat(document.getElementById("expenseAmount").value);
- if(!n||!a)return;
- state.expenses.push({n,a});persist();
- document.getElementById("expenseName").value="";document.getElementById("expenseAmount").value="";renderExpenses();
-}
-function deleteExpense(i){state.expenses.splice(i,1);persist();renderExpenses()}
-function renderExpenses(){
- document.getElementById("expenses").innerHTML=state.expenses.map((e,i)=>`
- <div class="card" style="margin-bottom:8px;display:flex;justify-content:space-between"><span>${e.n}</span><strong>£${e.a.toFixed(2)} <span class="muted">(${inr(e.a)})</span></strong><button class="action" onclick="deleteExpense(${i})">Delete</button></div>`).join("");
- const total=state.expenses.reduce((s,e)=>s+e.a,0);
- document.getElementById("expenseTotal").innerHTML=`Actual spending: £${total.toFixed(2)} <span class="muted">(${inr(total)})</span>`;
-}
-const PACK=["Passport","Visa documents","Travel insurance","Flight details","UK power adapter","Phone + charger","Power bank","Laptop + charger","Comfortable walking shoes","Waterproof jacket","Everyday clothes","Small backpack","Water bottle","Basic medicines","Student ID"];
-function renderPack(){
-  state.pack=state.pack||{};
-  document.getElementById("packList").innerHTML=PACK.map((x,i)=>`<label class="check"><input type="checkbox" ${state.pack[i]?"checked":""} onchange="togglePack(${i},this.checked)"><span class="${state.pack[i]?"done":""}">${x}</span></label>`).join("");
-}
-function togglePack(i,v){state.pack=state.pack||{};state.pack[i]=v;persist();renderPack()}
-function initJournal(){
-  document.getElementById("journalDay").innerHTML=TRIP.days.map((d,i)=>`<option value="${i}">${d[0]} — ${d[1]}</option>`).join("");
-  loadJournal();
-}
-function loadJournal(){
-  const i=document.getElementById("journalDay").value;
-  document.getElementById("journalText").value=(state.journal||{})[i]||"";
-}
-function saveJournal(){
-  const i=document.getElementById("journalDay").value;
-  state.journal=state.journal||{}; state.journal[i]=document.getElementById("journalText").value; persist();
-  document.getElementById("journalSaved").textContent=" Saved ✓";
-  setTimeout(()=>document.getElementById("journalSaved").textContent="",1500);
-}
-function saveNotes(){state.notes=document.getElementById("notesBox").value;persist();document.getElementById("saved").textContent=" Saved ✓";setTimeout(()=>document.getElementById("saved").textContent="",1500)}
-const savedFX=parseFloat(localStorage.getItem("london_fx"));
-if(savedFX>0){TRIP.fxGBP_INR=savedFX;document.getElementById("fxRate").value=savedFX;}
-document.getElementById("notesBox").value=state.notes;
-renderChecks();renderExpenses();renderDayPlanner();renderPack();initJournal();renderBudget();
-</script>
-
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
-  });
-}
-</script>
-
-</body>
-</html>
+const TRIP={fx:127.2,budget:[['Accommodation','£900–£1,400'],['Food & Drink','£600–£800'],['Transport','~£180'],['Attractions','£150–£250'],['Miscellaneous','~£100']],days:[
+['Day 1','Arrival & local setup','Check in, essentials and local walk'],['Day 2','Westminster','Big Ben, Parliament, Westminster Bridge, South Bank'],['Day 3','South Bank','London Eye area, Tate Modern, Globe'],['Day 4','Tower London','Tower of London + Tower Bridge'],['Day 5','Royal London','Buckingham Palace + St James’s Park'],['Day 6','Central London','Trafalgar Square, Piccadilly, Covent Garden, Soho'],['Day 7','British Museum','Museum + Bloomsbury'],['Day 8','Science Museum','Science and technology exhibits'],['Day 9','Natural History','Museum + Kensington'],['Day 10','Tech exploration','Return to Science Museum for deeper exhibits'],['Day 11','Bletchley Park','Full day trip'],['Day 12','Greenwich','Royal Observatory + Greenwich Park'],['Day 13','Maritime London','Cutty Sark + riverside'],['Day 14','Slow Sunday','Laundry, supermarket, local area'],['Day 15','Shoreditch','Street art + neighborhood'],['Day 16','Brick Lane','Food + vintage + markets'],['Day 17','Columbia Road','Flower Market + East London'],['Day 18','Camden','Camden Market + canal'],['Day 19','Little Venice','Canal walk'],['Day 20','Notting Hill','Portobello Road'],['Day 21','London parks','Hyde Park / Regent’s Park / Primrose Hill'],['Day 22','Oxford','University-city day trip'],['Day 23','Local London','Free/revisit day'],['Day 24','Cambridge','University-city day trip'],['Day 25','Richmond','Richmond Park + deer'],['Day 26','Hampstead','Hampstead Heath + Parliament Hill'],['Day 27','Local day','Café + neighborhood + food'],['Day 28','Shopping','Oxford Street + Carnaby Street'],['Day 29','Favorites','Return + photography'],['Day 30','Final day','Souvenirs + luggage + departure prep']]};
+const img=(file)=>`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}`;
+const places=[
+{name:'Tower Bridge',type:'Landmark',why:'Victorian bascule bridge and one of London’s defining symbols.',history:'Opened in 1894 after a late-19th-century need for another river crossing downstream from London Bridge. Its Neo-Gothic towers and lifting roadway made it an engineering landmark.',fame:'Iconic Thames views, glass floors, Victorian engine rooms and bridge lifts.',price:16,time:'1.5–2 h',station:'Tower Hill / Tower Gateway',image:img('Tower Bridge London February 2022.jpg'),official:'https://www.towerbridge.org.uk/'},
+{name:'Tower of London',type:'History',why:'Nearly 1,000 years of royal, military and prison history.',history:'A fortress, royal palace and prison complex with origins in Norman London. The site also housed the Royal Mint for centuries.',fame:'Crown Jewels, White Tower, ravens and centuries of royal history.',price:37,time:'3–5 h',station:'Tower Hill',image:img('Tower of London from the Shard.jpg'),official:'https://www.hrp.org.uk/tower-of-london/'},
+{name:'National Gallery',type:'Museum',why:'National collection of Western European paintings from the 13th–19th centuries.',history:'Founded in 1824 with 38 paintings from John Julius Angerstein’s collection; the Trafalgar Square building opened in 1838.',fame:'Works by Van Gogh, Velázquez, Turner, Botticelli and many others.',price:0,time:'2–3 h',station:'Charing Cross / Leicester Square',image:img('National Gallery London 2013.jpg'),official:'https://www.nationalgallery.org.uk/'},
+{name:'British Museum',type:'Museum',why:'A major museum of human history, art and culture.',history:'Founded in the 18th century and developed into a huge collection spanning cultures and periods around the world.',fame:'Rosetta Stone, Egyptian collections, Greek and Roman antiquities and the Great Court.',price:0,time:'2–4 h',station:'Russell Square / Holborn',image:img('British Museum from Great Russell Street.jpg'),official:'https://www.britishmuseum.org/'},
+{name:'London Eye',type:'Landmark',why:'Giant observation wheel on the South Bank with panoramic central-London views.',history:'Opened at the end of 1999 as a major millennium-era London attraction.',fame:'Views across Westminster, the Thames and central London.',price:33,time:'1–2 h',station:'Waterloo / Westminster',image:img('London Eye, London 2019.jpg'),official:'https://www.londoneye.com/'},
+{name:'Westminster & Big Ben',type:'Landmark',why:'The political and ceremonial heart of historic London.',history:'The Palace of Westminster grew through centuries of parliamentary history; the current Gothic Revival complex followed the 19th-century rebuilding after the 1834 fire.',fame:'Elizabeth Tower/Big Ben, Parliament, Westminster Abbey and river views.',price:0,time:'2–3 h',station:'Westminster',image:img('Elizabeth Tower April 2023.jpg'),official:'https://www.parliament.uk/visit/'},
+{name:'Buckingham Palace',type:'Royal',why:'The monarch’s official London residence and a major symbol of the British monarchy.',history:'The house evolved from Buckingham House into the palace associated with the monarchy during the 19th century.',fame:'Changing of the Guard, State Rooms during opening periods and the palace frontage.',price:0,time:'1.5–2 h',station:'Green Park / Victoria',image:img('Buckingham Palace, London - April 2009.jpg'),official:'https://www.rct.uk/visit/buckingham-palace'},
+{name:'Tate Modern',type:'Art',why:'Modern and contemporary art in a converted power-station building on the Thames.',history:'Tate Modern opened in 2000 in the former Bankside Power Station and transformed the South Bank art landscape.',fame:'Turbine Hall, modern art and panoramic views from the Blavatnik Building.',price:0,time:'2–3 h',station:'Blackfriars / Southwark',image:img('Tate Modern London 2007.jpg'),official:'https://www.tate.org.uk/visit/tate-modern'},
+{name:'Science Museum',type:'Science',why:'Hands-on museum covering science, engineering, medicine and technology.',history:'Part of the South Kensington museum complex, with collections built around scientific and industrial development.',fame:'Space, engineering, computing, transport and medical technology exhibits.',price:0,time:'3–5 h',station:'South Kensington',image:img('Science Museum London 2009.jpg'),official:'https://www.sciencemuseum.org.uk/'},
+{name:'Natural History Museum',type:'Nature',why:'A landmark museum of natural history and a famous Romanesque building.',history:'Opened in South Kensington in the 19th century as a dedicated natural-history institution.',fame:'Dinosaurs, fossils, Earth sciences and the grand Hintze Hall.',price:0,time:'3–4 h',station:'South Kensington',image:img('Natural History Museum London 2007.jpg'),official:'https://www.nhm.ac.uk/'},
+{name:'Royal Observatory Greenwich',type:'Science',why:'Historic astronomical observatory associated with Greenwich Mean Time and the Prime Meridian.',history:'Founded in the 17th century to improve navigation and astronomy; Greenwich became central to the world’s timekeeping system.',fame:'Prime Meridian line, historic clocks, astronomy galleries and Greenwich views.',price:24,time:'2–3 h',station:'Greenwich / Cutty Sark DLR',image:img('Royal Observatory Greenwich 2011.jpg'),official:'https://www.rmg.co.uk/royal-observatory'},
+{name:'Camden Market',type:'Market',why:'A large market district famous for alternative fashion, food and music culture.',history:'The Camden market area developed from the 1970s onward into a major visitor and shopping destination.',fame:'Street food, vintage, alternative fashion, crafts and canal-side atmosphere.',price:0,time:'2–4 h',station:'Camden Town',image:img('Camden Market London.jpg'),official:'https://camdenmarket.com/'}
+];
+const food=[
+{name:'Borough Market',famous:'Street food, cheeses, baked goods, international dishes',range:'£7–£15 planning',area:'Southwark',image:img('Borough Market London.jpg'),map:'Borough Market London'},
+{name:'Camden Market',famous:'International street food, desserts, burgers and snacks',range:'£7–£15 planning',area:'Camden',image:img('Camden Market London.jpg'),map:'Camden Market London'},
+{name:'Brick Lane',famous:'Bangladeshi curry, bagels, street food and vintage culture',range:'£7–£18 planning',area:'Spitalfields/Shoreditch',image:img('Brick Lane London 2012.jpg'),map:'Brick Lane London'},
+{name:'Spitalfields Market',famous:'Food stalls, global street food, coffee and shopping',range:'£6–£15 planning',area:'East London',image:img('Old Spitalfields Market 2012.jpg'),map:'Old Spitalfields Market London'},
+{name:'Chinatown London',famous:'Chinese and East Asian restaurants, bakeries and desserts',range:'£8–£20 planning',area:'Soho',image:img('Chinatown London 2013.jpg'),map:'Chinatown London'},
+{name:'Borough cheap lunch',famous:'Market lunch + dessert without a formal restaurant',range:'£8–£12 planning',area:'Borough',image:img('Borough Market London.jpg'),map:'Borough Market London'},
+{name:'Supermarket meal deal',famous:'Fast budget lunch from Tesco/Sainsbury’s/Co-op',range:'£4–£6 planning',area:'Everywhere',image:img('Tesco Extra, Coventry.jpg'),map:'Tesco London'},
+{name:'Pub meal',famous:'Classic British pub food; prices vary by pub and area',range:'£10–£20 planning',area:'Central/London-wide',image:img('British pub interior.jpg'),map:'London pub'}
+];
+const stay=[
+{name:'Stratford / Leyton',why:'Excellent transport links and often better value than central zones.',range:'£35–£70/night planning',famous:'Elizabeth line, Jubilee line, Westfield, Queen Elizabeth Olympic Park',image:img('Stratford station London 2012.jpg'),map:'Stratford London'},
+{name:'Camden / Kentish Town',why:'Good for markets, nightlife, music and north-London exploration.',range:'£40–£80/night planning',famous:'Camden Market, Regent’s Canal, Primrose Hill',image:img('Camden Town London 2008.jpg'),map:'Camden Town London'},
+{name:'Greenwich / New Cross',why:'Slower atmosphere, parks, maritime history and good student-oriented options.',range:'£35–£70/night planning',famous:'Greenwich Park, Observatory, Cutty Sark',image:img('Greenwich Park London 2008.jpg'),map:'Greenwich London'},
+{name:'Shepherd’s Bush',why:'Strong transport and diverse food, with west-London access.',range:'£40–£80/night planning',famous:'Westfield London, markets, Central/Circle/Hammersmith lines',image:img('Shepherds Bush London 2007.jpg'),map:'Shepherds Bush London'}
+];
+const transport=[
+['🚌 Bus','£1.75 PAYG adult fare; £5.25 bus/tram daily cap in the current TfL fare period.','Best for cheap short trips and sightseeing. Hopper fare allows unlimited bus/tram journeys within one hour for £1.75.','https://tfl.gov.uk/modes/buses/'],
+['🚇 Tube','Zone 1–2 daily PAYG cap £8.90; exact single fare depends on route/time.','Best for fast central travel. Touch in/out with the same card/device.','https://tfl.gov.uk/modes/tube/'],
+['🚆 Elizabeth line','Fare depends on zones; useful for Heathrow, Stratford and east/west London.','Fast option for longer east-west journeys.','https://tfl.gov.uk/modes/elizabeth-line/'],
+['🚊 DLR','Zone-based PAYG fares/caps apply.','Excellent for Greenwich, Docklands and east London.','https://tfl.gov.uk/modes/dlr/'],
+['🚶 Walk','£0','Use walking for nearby landmarks and Thames/canal routes.','https://www.google.com/maps/'],
+['🚤 River Bus','Separate fare system; check current price before travel.','Use when you want transport + Thames views.','https://www.thamesclippers.com/']
+];
+const checklist=['Passport','UK Standard Visitor Visa','Travel insurance','Flight booking','Accommodation booking','Student ID','Contactless card / phone wallet','SIM / eSIM','Power adapter','Emergency contacts','Document backups'];
+const pack=['Passport','Visa documents','Travel insurance','Flight details','UK power adapter','Phone + charger','Power bank','Laptop + charger','Comfortable walking shoes','Waterproof jacket','Everyday clothes','Small backpack','Water bottle','Basic medicines','Student ID'];
+const tabs=[['home','Home'],['plan','30 Days'],['places','Places'],['food','Food'],['stay','Hotels'],['transport','Transport'],['budget','Budget'],['pack','Packing'],['checklist','Checklist'],['journal','Journal'],['notes','Notes']];
+const KEY='london_trip_v2';let state=JSON.parse(localStorage.getItem(KEY)||'{"days":{},"checks":{},"pack":{},"expenses":[],"journal":{},"notes":""}');
+const money=g=>`£${Number(g).toFixed(2)} <span class="muted">(₹${Math.round(g*TRIP.fx).toLocaleString('en-IN')})</span>`;
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}function map(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+', London, UK')}
+function showTab(id,btn){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');scrollTo({top:0,behavior:'smooth'})}
+document.getElementById('nav').innerHTML=tabs.map((t,i)=>`<button class="${i?'':'active'}" onclick="showTab('${t[0]}',this)">${t[1]}</button>`).join('');
+function renderPlaces(){const q=(document.getElementById('placeSearch').value||'').toLowerCase();document.getElementById('placesList').innerHTML=places.filter(p=>(p.name+p.type+p.why+p.history).toLowerCase().includes(q)).map(p=>`<article class="card place-card"><img class="photo" src="${p.image}" alt="${p.name}" onerror="this.style.display='none'"><div class="label">${p.type}</div><h3>${p.name}</h3><p>${p.why}</p><div class="meta"><span class="tag">${p.price?'From £'+p.price:'Free entry'}</span><span class="tag">${p.time}</span><span class="tag">🚇 ${p.station}</span></div><div class="info-row"><b>History</b><span>${p.history}</span></div><div class="info-row"><b>Famous for</b><span>${p.fame}</span></div><div class="info-row"><b>Planning cost</b><span>${p.price?'£'+p.price+' ≈ ₹'+Math.round(p.price*TRIP.fx).toLocaleString('en-IN'):'£0 / free admission'}</span></div><div class="actions" style="margin-top:10px"><a href="${map(p.name)}" target="_blank">📍 Maps</a><a href="${p.official}" target="_blank">🌐 Official</a></div></article>`).join('')||'<div class="card">No place found.</div>'}
+function renderFood(){const q=(document.getElementById('foodSearch').value||'').toLowerCase();document.getElementById('foodList').innerHTML=food.filter(f=>(f.name+f.famous+f.area).toLowerCase().includes(q)).map(f=>`<article class="card place-card"><img class="photo" src="${f.image}" alt="${f.name}" onerror="this.style.display='none'"><div class="label">${f.area}</div><h3>${f.name}</h3><p><b>Famous for:</b> ${f.famous}</p><span class="pill">${f.range}</span><span class="pill">INR planning: ₹${f.range.replace(/[^0-9–]/g,'').split('–').map(x=>Math.round(Number(x||0)*TRIP.fx)).join('–')}</span><div class="actions" style="margin-top:10px"><a href="${map(f.map)}" target="_blank">📍 Maps</a></div></article>`).join('')}
+function renderStay(){document.getElementById('stayList').innerHTML=stay.map(s=>`<article class="card place-card"><img class="photo" src="${s.image}" alt="${s.name}" onerror="this.style.display='none'"><div class="label">Budget area</div><h3>${s.name}</h3><p>${s.why}</p><div class="meta"><span class="tag">${s.range}</span><span class="tag">₹${Math.round(Number(s.range.match(/\d+/)[0])*TRIP.fx).toLocaleString('en-IN')}+ / night planning</span></div><p class="muted"><b>Known for:</b> ${s.famous}</p><a href="${map(s.map)}" target="_blank">📍 Explore area</a></article>`).join('')}
+function renderTransport(){document.getElementById('transportList').innerHTML=transport.map(t=>`<div class="card"><h3>${t[0]}</h3><div class="pill">${t[1]}</div><p>${t[2]}</p><a href="${t[3]}" target="_blank">Official info ↗</a></div>`).join('')}
+function renderPlan(){const done=state.days||{};document.getElementById('dayPlanner').innerHTML=TRIP.days.map((d,i)=>`<div class="day"><div class="day-head"><h3>${d[0]} · ${d[1]}</h3><small>${done[i]?'DONE':'OPEN'}</small></div><label class="check" style="border:0"><input type="checkbox" ${done[i]?'checked':''} onchange="toggleDay(${i},this.checked)"><span class="${done[i]?'done':''}">${d[2]}</span></label><div class="actions"><a href="${map(d[1])}" target="_blank">📍 Maps</a><button class="action" onclick="jumpToGuide('${d[1]}')">🔎 Guide</button></div></div>`).join('');const c=Object.values(done).filter(Boolean).length;document.getElementById('progressText').textContent=`${c}/30 days completed`;document.getElementById('progressBar').style.width=(c/30*100)+'%';document.getElementById('homeProgress').textContent=`${c} / 30`}
+function jumpToGuide(text){const p=places.find(x=>text.toLowerCase().includes(x.name.toLowerCase().split(' ')[0]));if(p){const btn=[...document.querySelectorAll('nav button')].find(b=>b.textContent==='Places');showTab('places',btn);document.getElementById('placeSearch').value=p.name;renderPlaces()}else{const btn=[...document.querySelectorAll('nav button')].find(b=>b.textContent==='Food');showTab('food',btn);document.getElementById('foodSearch').value=text;renderFood()}}
+function toggleDay(i,v){state.days[i]=v;save();renderPlan()}
+function renderBudget(){document.getElementById('budgetGrid').innerHTML=TRIP.budget.map(x=>`<div class="stat"><span class="label">${x[0]}</span><strong>${x[1]}</strong></div>`).join('')}
+function updateFX(v){const n=parseFloat(v);if(!n||n<=0)return;TRIP.fx=n;localStorage.setItem('london_fx_v2',n);document.getElementById('homeFx').textContent='£1 → ₹'+n;renderPlaces();renderFood();renderStay();renderExpenses()}
+function addExpense(){const n=document.getElementById('expenseName').value.trim(),a=parseFloat(document.getElementById('expenseAmount').value);if(!n||!a)return;state.expenses.push({n,a});save();document.getElementById('expenseName').value='';document.getElementById('expenseAmount').value='';renderExpenses()}
+function renderExpenses(){document.getElementById('expenses').innerHTML=state.expenses.map((e,i)=>`<div class="card" style="margin-bottom:8px;display:flex;justify-content:space-between;gap:10px"><span>${e.n}</span><b>${money(e.a)}</b><button class="action" onclick="state.expenses.splice(${i},1);save();renderExpenses()">Delete</button></div>`).join('');const t=state.expenses.reduce((s,e)=>s+e.a,0);document.getElementById('expenseTotal').innerHTML=`Actual spending: ${money(t)}`}
+function renderChecks(){document.getElementById('checks').innerHTML=checklist.map((x,i)=>`<label class="check"><input type="checkbox" ${state.checks[i]?'checked':''} onchange="state.checks[${i}]=this.checked;save();renderChecks()"><span class="${state.checks[i]?'done':''}">${x}</span></label>`).join('')}
+function renderPack(){document.getElementById('packList').innerHTML=pack.map((x,i)=>`<label class="check"><input type="checkbox" ${state.pack[i]?'checked':''} onchange="state.pack[${i}]=this.checked;save();renderPack()"><span class="${state.pack[i]?'done':''}">${x}</span></label>`).join('')}
+function initJournal(){document.getElementById('journalDay').innerHTML=TRIP.days.map((d,i)=>`<option value="${i}">${d[0]} — ${d[1]}</option>`).join('');loadJournal()}function loadJournal(){const i=document.getElementById('journalDay').value;document.getElementById('journalText').value=state.journal[i]||''}function saveJournal(){const i=document.getElementById('journalDay').value;state.journal[i]=document.getElementById('journalText').value;save();document.getElementById('journalSaved').textContent=' Saved ✓';setTimeout(()=>document.getElementById('journalSaved').textContent='',1200)}function saveNotes(){state.notes=document.getElementById('notesBox').value;save();document.getElementById('saved').textContent=' Saved ✓';setTimeout(()=>document.getElementById('saved').textContent='',1200)}
+const fx=parseFloat(localStorage.getItem('london_fx_v2'));if(fx>0){TRIP.fx=fx;document.getElementById('fxRate').value=fx}document.getElementById('notesBox').value=state.notes||'';renderPlaces();renderFood();renderStay();renderTransport();renderPlan();renderBudget();renderExpenses();renderChecks();renderPack();initJournal();document.getElementById('homeFx').textContent='£1 → ₹'+TRIP.fx;
+</script><script>if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script></body></html>
